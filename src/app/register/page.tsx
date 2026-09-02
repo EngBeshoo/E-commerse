@@ -6,6 +6,7 @@ import { Controller, useForm } from 'react-hook-form'
 import { Button } from '@/components/ui/button'
 import { schema } from '@/schema/registerSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { z } from 'zod'
 
 export default function Register() {
   const form = useForm({
@@ -19,7 +20,7 @@ export default function Register() {
     resolver: zodResolver(schema)
   })
  
- function onSubmit(values:zod.infer<typeof schema>){
+ function onSubmit(values:z.infer<typeof schema>){
 console.log(values)
  }
 
@@ -106,7 +107,7 @@ console.log(values)
           control={form.control}
           rules={{ 
             required: 'Confirm password is required', 
-            validate: (value) => value === form.getValues('Password') || 'Passwords do not match' 
+            validate: (value) => value === form.getValues('password') || 'Passwords do not match' 
           }}
           render={({ field, fieldState }) => (
             <Field data-invalid={fieldState.invalid}>

@@ -31,7 +31,7 @@ export const authOptions: NextAuthOptions ={
 
                 if('token' in payload){
                     return{
-                        id:payload.user?._id || 1,
+                        id:payload.user.email,
                         user:payload.user,
                         token:payload.token
                     }

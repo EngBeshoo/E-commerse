@@ -11,6 +11,7 @@ import { signIn } from 'next-auth/react'
 import toast from 'react-hot-toast'
 import { SpinnerCustom } from '../_components/Spinner/Spinner'
 import { useState } from 'react'
+import { z } from 'zod'
 
 export default function Login() {
   const [isLoading, setisLoading] = useState(false)
@@ -22,7 +23,7 @@ export default function Login() {
     resolver: zodResolver(schema)
   })
  
- async function onSubmit(values:zod.infer<typeof schema>){
+ async function onSubmit(values:z.infer<typeof schema>){
   setisLoading(true)
 console.log(values)
 const response =await signIn('credentials',{
