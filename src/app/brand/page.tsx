@@ -27,12 +27,10 @@ export default async function Brand() {
     <div className="container mx-auto py-10 px-4">
       <h1 className="text-3xl font-bold text-primary-blue dark:text-white mb-8">Brands</h1>
       
-      {/* ============ Carousel للبراندات ============ */}
       <div className="mb-12">
         <BrandCarousel brands={allBrands} />
       </div>
 
-      {/* ============ Grid للبراندات ============ */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {allBrands.map((brand: any) => (
           <Link 
