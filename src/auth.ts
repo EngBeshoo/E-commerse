@@ -52,16 +52,17 @@ export const authOptions: NextAuthOptions = {
             if (user) {
                 token.user = user.user;
                 token.token = user.token;
-                token.email = user.email;
-                token.name = user.name;
+                token.email = user.email ?? undefined;
+                token.name = user.name ?? undefined;
             }
             return token;
         },
         async session({ session, token }) {
-            if (token) {
-                // ✅ خليها كائن كامل، مش نص
-                session.user = token.user;
-                session.accessToken = token.token;
+            if (token.user) {
+                session.user={
+                    ...session.user,
+                    ...token.user,
+                }
             }
             return session;
         }
