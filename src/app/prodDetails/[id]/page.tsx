@@ -1,5 +1,5 @@
+import AddBtnCart from "@/app/_components/AddBtn/AddBtnCart"
 import ProdImg from "@/app/_components/ProdImg/ProdImg"
-import WishlistButton from "@/app/_components/WishlistButton/WishlistButton"
 import { ProdItem } from "@/type/productInterface"
 
 type myProps={
@@ -60,12 +60,9 @@ export default async function ProdDetails(props:myProps) {
                             {singleProd.description}
                         </p>
 
-                        <div className="flex gap-3">
-                            <button className="flex-1 bg-primary-blue hover:bg-blue-700 text-white rounded-lg font-medium py-3 transition-colors">
-                                Add to Cart
-                            </button>
-                           <WishlistButton />
-                        </div>
+                        
+                            <AddBtnCart productId={singleProd._id}/>
+                        
                     </div>
                 </div>
 

@@ -29,7 +29,7 @@ console.log(values)
 const response =await signIn('credentials',{
   email: values.email, 
   password: values.password,
-  callbackUrl: '/',
+  callbackUrl: "/",
   redirect: false
 })
 console.log(response)
@@ -37,7 +37,7 @@ if(response?.ok){
     toast.success('Successfully Login')
   window.location.href = response.url || '/'
 }else{
-  toast.error("This didn't work.")
+  toast.error(response?.error ||"This didn't work.")
 
 }
 setisLoading(false)

@@ -1,5 +1,5 @@
 'use client'
-import {  FieldError, FieldLabel } from '@/components/ui/field'
+import { FieldError, FieldLabel } from '@/components/ui/field'
 import { Field } from '@/components/ui/field'
 import { Input } from '@/components/ui/input'
 import { Controller, useForm } from 'react-hook-form'
@@ -7,8 +7,26 @@ import { Button } from '@/components/ui/button'
 import { schema } from '@/schema/registerSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
+import { useMutation } from '@tanstack/react-query'
+import toast from 'react-hot-toast'
+import Link from 'next/link'
+import { useState } from 'react'
+
+// ✅ دالة تسجيل الدخول (Server Action أو API Call)
+async function registerUser(values: z.infer<typeof schema>) {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API}/auth/signup`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(values)
+    })
+    const data = await response.json()
+    return data
+}
 
 export default function Register() {
+  const [isLoading, setIsLoading] = useState(false)
   const form = useForm({
     defaultValues: {
       name: '',
@@ -19,10 +37,27 @@ export default function Register() {
     },
     resolver: zodResolver(schema)
   })
- 
- function onSubmit(values:z.infer<typeof schema>){
-console.log(values)
- }
+
+  const mutation = useMutation({
+    mutationFn: registerUser,
+    onSuccess: (data) => {
+      console.log(data)
+      if (data.message === 'success') {
+        toast.success('Account created successfully!')
+        window.location.href = '/login'
+      } else {
+        toast.error(data.message || 'Something went wrong')
+      }
+    },
+    onError: (error: any) => {
+      toast.error(error?.message || 'Something went wrong')
+    }
+  })
+
+  function onSubmit(values: z.infer<typeof schema>) {
+    console.log(values)
+    mutation.mutate(values)
+  }
 
   return (
     <div className="w-full max-w-md mx-auto mt-10 p-8 bg-white dark:bg-jet-black rounded-2xl border-2 border-border-gray dark:border-smoke-gray/20 shadow-lg">
@@ -155,10 +190,16 @@ console.log(values)
 
         <Button 
           type="submit" 
+          disabled={mutation.isPending || isLoading}
           className="mt-2 w-full bg-primary-blue hover:bg-blue-700 text-white rounded-lg font-medium py-3 transition-colors"
         >
-          Submit
+          {mutation.isPending || isLoading ? 'Loading...' : 'Submit'}
         </Button>
+        
+        <div className="flex justify-center items-center gap-2 mt-4 text-sm text-dark-text dark:text-off-white">
+          <p>Already have an account?</p>
+          <Link href="/login" className="text-primary-blue hover:text-blue-700">Sign In</Link>
+        </div>
       </form>
     </div>
   )
