@@ -33,9 +33,12 @@ export default async function Home() {
                 Premium accessories designed for work, travel and lifestyle.
               </p>
               <div className="flex gap-4">
+                <Link href='/products'>
                 <Button className="bg-primary-blue hover:bg-blue-700 text-white">
                   Shop Collection →
                 </Button>
+                </Link>
+
                 <Button variant="outline" className="border-primary-blue text-primary-blue hover:bg-light-blue">
                   Explore Deals
                 </Button>

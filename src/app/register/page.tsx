@@ -12,9 +12,8 @@ import toast from 'react-hot-toast'
 import Link from 'next/link'
 import { useState } from 'react'
 
-// ✅ دالة تسجيل الدخول (Server Action أو API Call)
 async function registerUser(values: z.infer<typeof schema>) {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API}/auth/signup`, {
+    const response = await fetch(`https://ecommerce.routemisr.com/api/v1/auth/signup`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
