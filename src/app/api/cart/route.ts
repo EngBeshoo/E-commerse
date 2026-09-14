@@ -10,7 +10,7 @@ export async function GET(req:NextRequest){
 
     const rep = await fetch(`https://ecommerce.routemisr.com/api/v1/cart`,{
         headers:{
-            token:token?.token,
+            token:token?.token as string,
             'Content-type':'application/json'
         }
     })

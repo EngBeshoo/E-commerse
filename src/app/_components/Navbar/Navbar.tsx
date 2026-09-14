@@ -3,10 +3,10 @@ import { Badge } from '@/components/ui/badge'
 import { useSession, signOut } from 'next-auth/react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import React, { useState } from 'react'
-import { getCart } from '@/services/cart/cartService'
+import  { useState } from 'react'
 import { getWishlist } from '@/services/wishlist/wishlistService'
 import { useQuery } from '@tanstack/react-query'
+import { CartItem } from '@/type/cart-resp'
 
 export default function Navbar() {
     const { data:cartData, isLoading, isError } =  useQuery<CartItem>({
@@ -16,7 +16,9 @@ export default function Navbar() {
         const payload = await resp.json()
         return payload
       },
+      
     })
+ 
   const { status, data: session } = useSession();
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
@@ -27,11 +29,19 @@ export default function Navbar() {
     queryFn: getWishlist,
     enabled: status === 'authenticated',
   })
+  
 
   // ✅ حساب الأرقام (لاحظ التغيير هنا)
   const cartCount = cartData?.numOfCartItems || 0
   const wishlistCount = wishlistData?.count || 0
 
+     if(isLoading){
+          return <p className="text-center py-8">Loading cart...</p>
+
+    }
+      if (isError) {
+    return <p className="text-center py-8 text-red-500">Failed to load cart.</p>
+  }
   function handleOpen() {
     setOpen(!open);
   }
