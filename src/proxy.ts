@@ -16,11 +16,11 @@ export default async function proxy(req: NextRequest) {
     }
 
     if (protectedPages.includes(pathname)) {
-        if (!token) {
-            const redirectUrl = new URL('/login', process.env.NEXTAUTH_URL)
-            redirectUrl.searchParams.set('error', 'You must be logged in to access this page')
-            return NextResponse.redirect(redirectUrl)
-        }
+        // if (!token) {
+        //     const redirectUrl = new URL('/login', process.env.NEXTAUTH_URL)
+        //     redirectUrl.searchParams.set('error', 'You must be logged in to access this page')
+        //     return NextResponse.redirect(redirectUrl)
+        // }
         return NextResponse.next()
     }
 

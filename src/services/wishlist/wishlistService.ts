@@ -7,7 +7,7 @@ async function getToken() {
     return session?.accessToken
 }
 
-// ✅ GET Wishlist (بيجيب الـ IDs)
+//  GET Wishlist (بيجيب الـ IDs)
 export async function getWishlist() {
     const token = await getToken()
     if (!token) throw new Error('Please Login')

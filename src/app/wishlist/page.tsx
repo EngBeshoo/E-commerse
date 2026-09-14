@@ -10,13 +10,13 @@ import { ProdCard } from '@/app/_components/ProdCard/ProdCard'
 export default function WishlistPage() {
     const queryClient = useQueryClient()
     
-    // ✅ جلب المنتجات مباشرة من الـ API
+    //  جلب المنتجات مباشرة من الـ API
     const { data, isLoading, error } = useQuery({
         queryKey: ['wishlist'],
         queryFn: getWishlist
     })
 
-    // ✅ الـ data هي مصفوفة من المنتجات الكاملة
+    //  الـ data هي مصفوفة من المنتجات الكاملة
     const wishlist = data?.data || []
 
     const removeMutation = useMutation({
