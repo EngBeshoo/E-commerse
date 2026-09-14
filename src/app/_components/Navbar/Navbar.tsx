@@ -9,15 +9,18 @@ import { getWishlist } from '@/services/wishlist/wishlistService'
 import { useQuery } from '@tanstack/react-query'
 
 export default function Navbar() {
+    const { data:cartData, isLoading, isError } =  useQuery<CartItem>({
+      queryKey: ['cart'],
+      queryFn: async () => {
+        const resp = await fetch('/api/cart')
+        const payload = await resp.json()
+        return payload
+      },
+    })
   const { status, data: session } = useSession();
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
 
-  const { data: cartData } = useQuery({
-    queryKey: ['cart-count'],
-    queryFn: getCart,
-    enabled: status === 'authenticated',
-  })
 
   const { data: wishlistData } = useQuery({
     queryKey: ['wishlist-count'],
@@ -95,7 +98,7 @@ export default function Navbar() {
                 </Link>
                 {cartCount > 0 && (
                   <Badge className="absolute -top-1 start-3 bg-red-600 text-white border-2 border-white dark:border-zinc-900 px-1.5 py-0.5 text-[10px] font-bold rounded-full">
-                    {cartCount}
+                    {cartData.numOfCartItems}
                   </Badge>
                 )}
               </li>

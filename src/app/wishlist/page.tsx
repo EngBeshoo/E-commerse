@@ -10,7 +10,7 @@ import { ProdCard } from '@/app/_components/ProdCard/ProdCard'
 export default function WishlistPage() {
     const queryClient = useQueryClient()
     
-    //  جلب المنتجات مباشرة من الـ API
+    
     const { data, isLoading, error } = useQuery({
         queryKey: ['wishlist'],
         queryFn: getWishlist
