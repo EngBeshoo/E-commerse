@@ -11,7 +11,7 @@ export default function AddBtnCart({productId}:{productId:string}) {
   const queryClient = useQueryClient()
   const [isWishlisted, setIsWishlisted] = useState(false)
 
-  // ✅ Mutation للـ Cart
+  //  Mutation للـ Cart
   const cartMutation = useMutation({
     mutationFn: addProd,
     onSuccess: (data) => {
@@ -24,7 +24,7 @@ export default function AddBtnCart({productId}:{productId:string}) {
     }
   })
 
-  // ✅ Mutation للـ Wishlist (إضافة وحذف)
+  //  Mutation للـ Wishlist (إضافة وحذف)
   const wishlistMutation = useMutation({
     mutationFn: ({ action, productId }: { action: 'add' | 'remove', productId: string }) => {
       return action === 'add' ? addToWishlist(productId) : removeFromWishlist(productId)
