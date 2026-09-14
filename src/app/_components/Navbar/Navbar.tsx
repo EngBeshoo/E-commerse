@@ -6,10 +6,10 @@ import { usePathname } from 'next/navigation'
 import  { useState } from 'react'
 import { getWishlist } from '@/services/wishlist/wishlistService'
 import { useQuery } from '@tanstack/react-query'
-import { CartItem } from '@/type/cart-resp'
+import { Root } from '@/type/cart-resp'
 
 export default function Navbar() {
-    const { data:cartData, isLoading, isError } =  useQuery<CartItem>({
+    const { data:cartData, isLoading, isError } =  useQuery<Root>({
       queryKey: ['cart'],
       queryFn: async () => {
         const resp = await fetch('/api/cart')
@@ -108,7 +108,7 @@ export default function Navbar() {
                 </Link>
                 {cartCount > 0 && (
                   <Badge className="absolute -top-1 start-3 bg-red-600 text-white border-2 border-white dark:border-zinc-900 px-1.5 py-0.5 text-[10px] font-bold rounded-full">
-                    {cartData.numOfCartItems}
+                    {cartData?.numOfCartItems}
                   </Badge>
                 )}
               </li>

@@ -1,7 +1,7 @@
 'use client'
 import { updateCartQty } from '@/services/cart/cartService'
 import { removeFromCart } from '@/services/cart/DeleteCart'
-import { CartItem } from '@/type/cart-resp'
+import { Root } from '@/type/cart-resp'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { getSession } from 'next-auth/react'
 import React from 'react'
@@ -10,7 +10,7 @@ import toast from 'react-hot-toast'
 export  default function Cart() {
       const queryClient = useQueryClient()
 
-  const { data:cartData, isLoading, isError } =  useQuery<CartItem>({
+  const { data:cartData, isLoading, isError } =  useQuery<Root>({
     queryKey: ['cart'],
     queryFn: async () => {
       const resp = await fetch('/api/cart')
