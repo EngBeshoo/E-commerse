@@ -40,7 +40,7 @@ export default function Register() {
   const mutation = useMutation({
     mutationFn: registerUser,
     onSuccess: (data) => {
-      console.log(data)
+      
       if (data.message === 'success') {
         toast.success('Account created successfully!')
         window.location.href = '/login'
