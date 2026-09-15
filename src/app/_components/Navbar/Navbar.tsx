@@ -31,16 +31,16 @@ export default function Navbar() {
   })
   
 
-  // ✅ حساب الأرقام (لاحظ التغيير هنا)
+  //  حساب الأرقام (لاحظ التغيير هنا)
   const cartCount = cartData?.numOfCartItems || 0
   const wishlistCount = wishlistData?.count || 0
 
      if(isLoading){
-          return <p className="text-center py-8">Loading cart...</p>
+          return <p className="text-center py-8">Loading...</p>
 
     }
       if (isError) {
-    return <p className="text-center py-8 text-red-500">Failed to load cart.</p>
+    return <p className="text-center py-8 text-red-500">Failed..</p>
   }
   function handleOpen() {
     setOpen(!open);
