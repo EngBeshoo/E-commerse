@@ -167,9 +167,7 @@ export default function Cart() {
                           <h3 className="font-semibold text-gray-800 dark:text-white line-clamp-2">
                             {item.product.title}
                           </h3>
-                          <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                            {item.product.category?.name}
-                          </p>
+                          
                         </div>
                       </div>
                     </td>
